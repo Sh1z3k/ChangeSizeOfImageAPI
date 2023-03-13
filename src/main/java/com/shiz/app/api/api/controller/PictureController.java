@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -23,13 +25,10 @@ public class PictureController {
     }
 
     @GetMapping("/Picture")
-    public Picture getPicture(@RequestParam String pathToPic) throws IOException {
+    public Image getPicture(@RequestParam Integer id) throws IOException {
 
-        Optional Picture = pictureService.getPicture(pathToPic);
-        if(Picture.isPresent()){
-            return (Picture) Picture.get();
-        }
-        return null;
+        Image picture = pictureService.getPicture(id);
+            return picture;
     }
 
 

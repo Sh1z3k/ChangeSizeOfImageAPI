@@ -4,20 +4,29 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 public class Picture {
     private Image image;
     private String pathToImage;
 
-    public Picture(URL pathToImage) throws IOException, URISyntaxException {
-        this.image = ImageIO.read(new File(pathToImage.toURI()));
+    private Integer id;
+
+    public Picture(String pathToImage, Integer id) throws IOException {
+        this.image = ImageIO.read(new File(pathToImage));
         this.pathToImage = String.valueOf(pathToImage);
+        this.id = id;
 
     }
 
     public Image getImage() {
         return image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

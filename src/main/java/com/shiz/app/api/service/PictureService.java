@@ -2,9 +2,11 @@ package com.shiz.app.api.service;
 
 
 import com.shiz.app.api.api.model.Picture;
+import com.shiz.app.api.api.model.User;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -23,22 +25,25 @@ public class PictureService {
         picsList = new ArrayList<>();
 
 
+        //File myObj = new File("TUTAJ.txt");
+        // myObj.createNewFile();
 
-        Picture pic1 = new Picture(getClass().getClassLoader().getResource("res/pic1.jpg"));
-        Picture pic2 = new Picture(getClass().getClassLoader().getResource("res/pic2.jpg"));
-        Picture pic3 = new Picture(getClass().getClassLoader().getResource("res/pic3.jpg"));
-        picsList.addAll(Arrays.asList(pic1, pic2, pic3));
+
+        Picture pic1 = new Picture("main_resources/pic1.jpg", 1);
+        Picture pic2 = new Picture("main_resources/pic2.png", 2);
+        picsList.addAll(Arrays.asList(pic1, pic2));
     }
-    public Optional<Picture> getPicture(String PathToPic) throws IOException {
 
-        Optional optional = Optional.empty();
+
+    public Image getPicture(Integer id){
+
         for (Picture pic:picsList)
-            if(pic.getImage() == ImageIO.read(new File(PathToPic)))
-            {
-                optional = Optional.of(pic);
-                return optional;
+            if(id == pic.getId()) {
+                return pic.getImage();
+
             }
 
-        return optional;
+
+        return null;
     }
 }
